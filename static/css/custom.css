@@ -1,0 +1,15 @@
+.font-sans{
+    font-family: 'Open Sans';
+}
+.background-body{
+    background-image: url('../images/background.jpg');
+    background-repeat:initial;
+    background-size:auto;
+}
+
+.m-none{
+    margin: 0 !important;
+}
+.p-none{
+    padding: 0 !important;
+}

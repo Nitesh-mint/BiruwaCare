@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-5">
+            <img src="{% static 'images/example_home_image.webp' %}" class="img-fluid">
+        </div>
+        <div class="col-7 d-flex flex-column justify-content-center align-items-center">
+            <div class="row text-center">
+                <p class="text-dark m-none p-2" style="font-size: 2.3rem;"><b style="color: green;">Detect</b> and <b
+                        style="color: Green;">Heal</b> plant conditions</p>
+            </div>
+            <div class="row  m-none p-none">
+                <p class="text-dark m-none" style="font-size: 2.3rem;">with</p>
+            </div>
+            <div class="row">
+                <img class="img-fluid" src="{% static 'images/logo3.webp' %}">
+            </div>
+            <div class="row">
+                <div class="mt-5">
+                    <a href="{% url 'input_image' %}" class="text-white link"><button class="btn btn-lg btn-primary"
+                            type="button">Try Now</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="container d-flex flex-column justify-content-center align-items-center">
+            <h1 class="text-dark"><b>Features</b></h1>
+            <div class="col-10">
+                <p class="text-center fs-5">Our App Is Packed With Amazing Features To Revolutionize Farming and personal plant
+                    keeping!
+                    With Our Machine
+                    Learning-Powered Plant Disease Detection Web app, Farmers Can Make Smart Decisions Using Factors
+                    Like Rainfall,
+                    And Weather Conditions. Plus, Our Advanced Plant Disease Detection, Driven By Deep
+                    Learning Models, Ensures Accurate And Efficient Identification Of Crop Ailments. It's A Game-Changer
+                    For Agriculture!</p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-5">
+                    <img src="{% static 'images/feature1.jpeg' %}" class="img-fluid rounded">
+                </div>
+                <div class="col d-flex flex-column justify-content-center align-items-center gap-3">
+                    <h1 class="pt-5">Plant Disease <b style="color:green;">Identification</b></h1>
+                    <p class="fs-5 text-center">Assist Farmers In Detecting Plant Diseases By Enabling Image Uploads, Utilizing This Analysis For Prompt And Precise Identification, Enhancing Farming Efficiency And Crop Management.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
