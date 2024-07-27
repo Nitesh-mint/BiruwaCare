@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+import os
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -9,6 +12,7 @@ from PIL import Image
 import io
 
 
+load_dotenv()
 def home(request):
     return render(request,'home.html')
 

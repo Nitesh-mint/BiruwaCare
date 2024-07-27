@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z_knv49k04il)pi5#1_b(7=g34f@sh@$smekypb4&dv*dg#ex3'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +43,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Local app
     'MainApp',
+    'accounts',
+    #Thrid-party
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    #for location 
+    'django.contrib.gis',
+    #bootstrap_form
+    'crispy_forms',
+    'crispy_bootstrap5',
+    #fontawesome
+    'fontawesomefree',
+    #MapWidget
+    'mapwidgets',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # For all-auth
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'BiruwaCare.urls'
@@ -64,6 +85,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #Added by me
+                'accounts.context_processors.get_user_location',
             ],
         },
     },
@@ -77,8 +100,12 @@ WSGI_APPLICATION = 'BiruwaCare.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'biruwacare',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -121,9 +148,76 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR/'static'] #path to the root static folder
 
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Allauth
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_SESSION_REMEMBER = None  # for remember me in LoginPage
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '794038001406-dk32ildalk6fmuf064cbveu7ab0ipsom.apps.googleusercontent.com',
+            'secret': os.getenv('GOOGLE_SECRET_KEY'),
+            'key': ''
+        }
+    }
+}
+
+# Crispy Template packs
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+#gdal and geos library path 
+GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH', '/opt/homebrew/Cellar/gdal/3.9.1_1/lib/libgdal.dylib')
+GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH', '/opt/homebrew/Cellar/geos/3.12.2/lib/libgeos_c.dylib')
+
+#Map Widget Configuration
+MAP_WIDGETS = {
+    "GoogleMap": {
+        "apiKey": '', # your google API
+        "PointField": {
+            "interactive": {
+                "mapOptions": {
+                    "zoom": 15,  # default map initial zoom
+                    "scrollwheel": True,
+                    "streetViewControl": True
+                },
+                "GooglePlaceAutocompleteOptions": {
+                    "componentRestrictions": {"country": "uk"}
+                },
+                "mapCenterLocationName": "Kathmandu"
+            },
+        },
+    },
+}
+
+# For caching
+# settings.py
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',  # Arbitrary value
+    }
+}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Signup {% endblock title %}
+
+{% block body %}
+  <div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="row col-8">
+          <form method="post" class="">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Signup</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

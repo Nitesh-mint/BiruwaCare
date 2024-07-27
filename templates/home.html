@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %} Home {% endblock title %}
 {% block body %}
-<div class="container">
+{% include 'includes/navbar.html' %}
+<div class="container mt-5">
     <div class="row">
         <div class="col-5">
             <img src="{% static 'images/example_home_image.webp' %}" class="img-fluid">
@@ -29,7 +31,7 @@
         <div class="container d-flex flex-column justify-content-center align-items-center">
             <h1 class="text-dark"><b>Features</b></h1>
             <div class="col-10">
-                <p class="text-center fs-5">Our App Is Packed With Amazing Features To Revolutionize Farming and personal plant
+                <p class="text-center fs-5">Our Web App Is Packed With Amazing Features To Revolutionize Farming and personal plant
                     keeping!
                     With Our Machine
                     Learning-Powered Plant Disease Detection Web app, Farmers Can Make Smart Decisions Using Factors
