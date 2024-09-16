@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-primary sticky-top" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
             <img width="150px" src="{% static 'images/logo3.webp' %}">
@@ -9,18 +9,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto fs-5 fw-bold">
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'home' %}">Home
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blogs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
+                    <a class="nav-link" href="{% url 'post_list' %}">Blogs</a>
+                </li> 
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>

@@ -10,18 +10,19 @@
         </div>
         <div class="col-7 d-flex flex-column justify-content-center align-items-center">
             <div class="row text-center">
-                <p class="text-dark m-none p-2" style="font-size: 2.3rem;"><b style="color: green;">Detect</b> and <b
-                        style="color: Green;">Heal</b> plant conditions</p>
+                <p class="m-none p-2 fw-bolder" style="font-size: 2.3rem; color: #63b68e;">
+                    <b style="color: #2c6455;">Detect</b> and <b style="color: #2c6455;">Heal</b> plant conditions
+                </p>
             </div>
-            <div class="row  m-none p-none">
-                <p class="text-dark m-none" style="font-size: 2.3rem;">with</p>
+            <div class="row m-none p-none">
+                <p class="m-none fw-bolder" style="font-size: 2.3rem; color: #63b68e;">with</p>
             </div>
             <div class="row">
                 <img class="img-fluid" src="{% static 'images/logo3.webp' %}">
             </div>
             <div class="row">
                 <div class="mt-5">
-                    <a href="{% url 'input_image' %}" class="text-white link"><button class="btn btn-lg btn-primary"
+                    <a href="{% url 'upload_image' %}" class="text-white link"><button class="btn btn-lg btn-primary"
                             type="button">Try Now</button></a>
                 </div>
             </div>
@@ -29,24 +30,47 @@
     </div>
     <div class="row mt-5">
         <div class="container d-flex flex-column justify-content-center align-items-center">
-            <h1 class="text-dark"><b>Features</b></h1>
+            <h1 style="color: #2c6455;"><b>Features</b></h1>
             <div class="col-10">
-                <p class="text-center fs-5">Our Web App Is Packed With Amazing Features To Revolutionize Farming and personal plant
-                    keeping!
-                    With Our Machine
-                    Learning-Powered Plant Disease Detection Web app, Farmers Can Make Smart Decisions Using Factors
-                    Like Rainfall,
-                    And Weather Conditions. Plus, Our Advanced Plant Disease Detection, Driven By Deep
-                    Learning Models, Ensures Accurate And Efficient Identification Of Crop Ailments. It's A Game-Changer
-                    For Agriculture!</p>
+                <p class="text-center fs-5">Our web app is packed with amazing features to revolutionize farming and
+                    personal plant keeping! With our machine learning-powered plant disease detection web app, farmers
+                    can make smart decisions using factors like rainfall and weather conditions. Plus, our advanced
+                    plant disease detection, driven by deep learning models, ensures accurate and efficient
+                    identification of crop ailments. It's a game-changer for agriculture!</p>
             </div>
             <div class="row mt-5">
                 <div class="col-5">
-                    <img src="{% static 'images/feature1.jpeg' %}" class="img-fluid rounded">
+                    <img src="{% static 'images/Nepali_image.jpeg' %}" class="img-fluid rounded">
                 </div>
                 <div class="col d-flex flex-column justify-content-center align-items-center gap-3">
-                    <h1 class="pt-5">Plant Disease <b style="color:green;">Identification</b></h1>
-                    <p class="fs-5 text-center">Assist Farmers In Detecting Plant Diseases By Enabling Image Uploads, Utilizing This Analysis For Prompt And Precise Identification, Enhancing Farming Efficiency And Crop Management.</p>
+                    <h1 class="pt-5" style="color: #63b68e;">Plant Disease <b style="color:#2c6455;">Identification</b></h1>
+                    <p class="fs-5 text-center">Assist farmers in detecting plant diseases by enabling image uploads,
+                        utilizing this analysis for prompt and precise identification, enhancing farming efficiency and
+                        crop management.</p>
+                    <a href="{% url 'upload_image' %}"><button class="btn btn-lg btn-primary">Try Now</button></a>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col d-flex flex-column justify-content-center align-items-center gap-3">
+                    <h1 class="pt-5" style="color:#63b68e;">Accurate weather <b style="color:green;">Forecasting</b></h1>
+                    <p class="fs-5 text-center">Our web app provides accurate weather forecasts, helping farmers plan
+                        their work efficiently. You can rely on our weather feature to make informed decisions for your
+                        farming activities.</p>
+                </div>
+                <div class="col-5">
+                    <img src="{% static 'images/feature_weather1.jpeg' %}" class="img-fluid rounded">
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-5">
+                    <img src="{% static 'images/BlogThumbnail.jpeg' %}" class="img-fluid rounded">
+                </div>
+                <div class="col d-flex flex-column justify-content-center align-items-center gap-3">
+                    <h1 class="pt-5"><b style="color:#2c6455;">Blogs</b></h1>
+                    <p class="fs-5 text-center">Discover expert tips and insightful blogs about plant diseases on our
+                        platform. Stay informed with the latest updates and solutions to keep your plants healthy and
+                        thriving.</p>
+                        <a href="{% url 'post_list' %}"><button class="btn btn-lg btn-primary">Read Now</button></a 
                 </div>
             </div>
         </div>

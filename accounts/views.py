@@ -11,6 +11,7 @@ load_dotenv()
 
 from .models import CustomUser
 from .forms import CustomUserUpdateForm
+from MainApp.models import ImagePrediction, DiseaseInfo
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "account/profile.html"
@@ -43,16 +44,24 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         city_id = city.get('id')
         city_name = city.get('name')
         return weather_id, city_id, city_name
+    
+
+    
+    def get_user_prediction_history(self):
+        user = self.get_user()
+        user_predictions = ImagePrediction.objects.filter(user=user)[::-1]
+        return user_predictions
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         weather_id, city_id , city_name = self.get_user_location()
-
+        history = self.get_user_prediction_history()[:5]
         context = {
             'user': self.get_user(),
             'weather_id': weather_id,
             'city_id': city_id,
             'city_name': city_name,
+            'history':history,
         }
         return context
     

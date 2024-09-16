@@ -41,9 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     #Local app
     'MainApp',
     'accounts',
+    'Blogs',
+
     #Thrid-party
     'allauth',
     'allauth.account',
@@ -58,6 +61,8 @@ INSTALLED_APPS = [
     'fontawesomefree',
     #MapWidget
     'mapwidgets',
+    #CkEditor
+    "django_ckeditor_5",
 ]
 
 MIDDLEWARE = [
@@ -162,6 +167,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Allauth
 AUTH_USER_MODEL = "accounts.CustomUser"
 
+# all-auth configurations
+LOGIN_REDIRECT_URL = "home"
+ACCOUNT_LOGOUT_REDIRECT = "home"
+SITE_ID = 1
+LOGIN_URL = "account_login" #allauth default url for login
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+EMAIL_BACKEND = (
+    "django.core.mail.backends.console.EmailBackend"  # send mails to console
+)
+
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
@@ -169,6 +191,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 # ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_SESSION_REMEMBER = None  # for remember me in LoginPage
+
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
@@ -185,13 +208,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Crispy Template packs
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 #gdal and geos library path 
-GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH', '/opt/homebrew/Cellar/gdal/3.9.1_1/lib/libgdal.dylib')
-GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH', '/opt/homebrew/Cellar/geos/3.12.2/lib/libgeos_c.dylib')
+GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH', '/opt/homebrew/Cellar/gdal/3.9.2_1/lib/libgdal.dylib')
+GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH', '/opt/homebrew/Cellar/geos/3.13.0/lib/libgeos_c.dylib')
 
 #Map Widget Configuration
 MAP_WIDGETS = {
@@ -219,5 +241,111 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',  # Arbitrary value
+    }
+}
+
+
+# CK-Editor
+
+customColorPalette = [
+        {
+            'color': 'hsl(4, 90%, 58%)',
+            'label': 'Red'
+        },
+        {
+            'color': 'hsl(340, 82%, 52%)',
+            'label': 'Pink'
+        },
+        {
+            'color': 'hsl(291, 64%, 42%)',
+            'label': 'Purple'
+        },
+        {
+            'color': 'hsl(262, 52%, 47%)',
+            'label': 'Deep Purple'
+        },
+        {
+            'color': 'hsl(231, 48%, 48%)',
+            'label': 'Indigo'
+        },
+        {
+            'color': 'hsl(207, 90%, 54%)',
+            'label': 'Blue'
+        },
+    ]
+
+
+# CKEditor
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|', 'bold', 'italic', 'link',
+            'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', '|',
+            'alignment', '|', 'imageTextAlternative', '|', 'undo', 'redo'
+        ],
+        'removePlugins':'stylesheetparser',
+        'allowedContent': 'iframe[*]',
+        'mediaEmbed': {'previewsInData': 'true'},
+    },
+    
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': [
+            'heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+            'code', 'subscript', 'superscript', 'highlight', '|', 'codeBlock','insertImage',
+            'imageResize', 'imageStyle:alignLeft', 'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|',
+            'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',
+            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+            'insertTable', '|',
+            'alignment', '|', 'imageTextAlternative', '|', 'undo', 'redo'
+        ],
+    },
+    'alignment': {
+        'options': ['left', 'center', 'right', 'justify'],
+        'icon': 'alignment',
+    },
+    'image': {
+        'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                    'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|', 'imageResize'],
+        'styles': [
+            'full',
+            'side',
+            'alignLeft',
+            'alignRight',
+            'alignCenter',
+        ],
+    },
+    'table': {
+        'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells',
+                           'tableProperties', 'tableCellProperties'],
+        'tableProperties': {
+            'borderColors': customColorPalette,
+            'backgroundColors': customColorPalette
+        },
+        'tableCellProperties': {
+            'borderColors': customColorPalette,
+            'backgroundColors': customColorPalette
+        }
+    },
+    'heading': {
+        'options': [
+            {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+            {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+            {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+            {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'}
+        ]
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
     }
 }

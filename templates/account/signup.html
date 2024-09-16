@@ -9,6 +9,7 @@
         <div class="row col-8">
           <form method="post" class="">
             {% csrf_token %}
+            {{ form | crispy }}
             <button type="submit" class="btn btn-success">Signup</button>
           </form>
         </div>

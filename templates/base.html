@@ -26,10 +26,15 @@
 
     <!-- J Query -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- CKEditor -->
+    <link href="{% static 'django_ckeditor_5/dist/styles.css' %}" type="text/css" media="all" rel="stylesheet">
+    <script src="{% static 'django_ckeditor_5/dist/bundle.js' %}"></script>
+
 </head>
 
 <body class="background-body">
-    <div class="font-sans">
+    <div class="poppin" style="margin-bottom: 50px;">
         {% block body %}
             
         {% endblock body %}

@@ -13,3 +13,21 @@
 .p-none{
     padding: 0 !important;
 }
+
+.card-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-img-overlay {
+    bottom: 50%; /* Adjust as needed to control the height of the overlay */
+    background: rgba(0, 0, 0, 0.3); /* Optional: Background for better readability */
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.mb-n5 {
+    margin-bottom: -7rem; /* Adjust value to control overlap, might need tweaking */
+}

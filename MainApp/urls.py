@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import home, predict, input_image
+from .views import home, predict,  upload_image, result
 
 urlpatterns = [
     path('', home, name="home"),
     path('predict/', predict, name='predict'),
-    path('send_image/', input_image, name='input_image'),
+    path('upload_image/', upload_image, name='upload_image'),
+    path('result/<int:pk>/', result, name="result"),
 ]

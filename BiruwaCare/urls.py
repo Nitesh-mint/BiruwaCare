@@ -22,8 +22,11 @@ from django.conf.urls.static import static # for staticfiles
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("MainApp.urls")), 
+    path('', include("MainApp.urls")),
     path('accounts/', include('accounts.urls')),
+    path('blogs/',include("Blogs.urls")),
+    #CKEditor
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
     #For allauth
     path('accounts/', include("allauth.urls")),
     path('accounts/', include('allauth.socialaccount.urls')),

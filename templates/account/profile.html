@@ -5,7 +5,7 @@
 {% include 'includes/navbar.html' %}
 <div class="container mt-5 mb-5">
     <div class="row">
-        <div class="col-sm-2 col-md-2 d-flex p-3 gap-3">
+        <div class="col-sm-12 col-md-2 d-flex p-3 gap-3">
             <div class="card shadow border-0">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
@@ -16,52 +16,52 @@
                         {% endif %}
                         <div class="mt-3">
                             <h4 class="fs-4 text-dark">{{ user.username| title }}</h4>
-                            <p class="tex-secondary">{{ city_name }}</p>
+                            <p class="badge rounded-pill text-bg-success fs-6">{{ city_name }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-10 col-md-10">
-            <div class="card mt-3 mb-3 shadow border-0">
+        <div class="col-sm-12 col-md-10">
+            <div class="card mt-3 mb-3 shadow border-0 p-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0"><i class="fa-solid fa-user"></i> Full Name</h6>
+                            <h6 class="mb-0"><i class="fa-solid fa-user text-dark"></i> Full Name</h6>
                         </div>
-                        <div class="col-sm-9 text-success">
+                        <div class="col-sm-9">
                             {{ user.first_name }} {{ user.last_name }}
                         </div>
                     </div>
                     <hr class="border">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0"><i class="fa-solid fa-envelope"></i> Email</h6>
+                            <h6 class="mb-0"><i class="fa-solid fa-envelope text-dark"></i> Email</h6>
                         </div>
-                        <div class="col-sm-9 text-success">
+                        <div class="col-sm-9">
                             {{ user.email }}
                         </div>
                     </div>
                     <hr class="border">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0"><i class="fa-solid fa-phone"></i> Phone</h6>
+                            <h6 class="mb-0"><i class="fa-solid fa-phone text-dark"></i> Phone</h6>
                         </div>
-                        <div class="col-sm-9 text-success">
+                        <div class="col-sm-9">
                             {{ user.phone }}
                         </div>
                     </div>
                     <hr class="border">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h6 class="mb-0"><i class="fa-solid fa-location-dot"></i> Location</h6>
+                            <h6 class="mb-0"><i class="fa-solid fa-location-dot text-dark"></i> Location</h6>
                         </div>
-                        <div class="col-sm-9 text-success">
+                        <div class="col-sm-9">
                             {{ city_name }}
                         </div>
                     </div>
                     <hr class="border">
-                    <button class="btn btn-success"><a class="link text-white" href="{% url 'update_profile' user.id %}">Edit</a></button>
+                    <button class="btn btn-success"><a class="link-underline link-underline-opacity-0 text-white" href="{% url 'update_profile' user.id %}">Edit</a></button>
                 </div>
             </div>
         </div>
@@ -70,10 +70,22 @@
         var city_id = "{{ city_id }}";
         var weather_id = "{{ weather_id }}"
     </script>
-    <div class="row">
-        <div class="col d-flex justify-content-center align-items-center">
+    <div class="row gap-3">
+        <div class="col-sm-12 col-md-7">
             <div id="openweathermap-widget-11"></div>
             <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script><script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 11,cityid: city_id,appid: 'd980715d4a83aa0eda2ab6ac97594aea',units: 'metric',containerid: 'openweathermap-widget-11',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
+        </div>
+        <div class="col-sm-12 col-md-4 d-flex justify-content-center">
+            <div class="card shadow-lg border-0 p-3 w-100">
+                <h4 class="card-title fw-bolder text-dark"><i class="fa-solid fa-spinner"></i> Prediction History</h4>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for h in history %}
+                            <li class="list-group-item"><a style="text-decoration: none;" class="icon-link icon-link-hover" href="{% url 'result' h.pk %}">{{ h }}</a>  <i class="fa-solid fa-arrow-right"></i></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

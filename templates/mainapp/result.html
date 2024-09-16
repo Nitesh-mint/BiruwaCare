@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+    {% include 'includes/navbar.html' %}
+    <div class="container p-4">
+        <h1 class="pt-3 bg-white text-dark text-bolder"> <i class="fa-solid fa-circle-check"></i> Result</h1>
+        <p class="fs-5 text-dark">Status:{% if infection_false %} <span  class="badge rounded-pill text-bg-success ">{{ infection_false }} </span> {% else %} <span  class="badge rounded-pill" style="background-color: #DC143C;">{{ infection_true }} </span> {% endif %} </p>
+        {% if infection_true %}
+            <p class="text-dark fs-5">Disease <span class="badge rounded-pill" style="background-color: #DC143C;"> {{ image_prediction.disease.name }} </span></p>
+        {% endif %}
+        <div class="row">
+            <div class="card border-0 position-relative">
+                {% if image_prediction.disease.thumbnail %}
+                    <img style="max-height:400px !important;"  src="{{ image_prediction.disease.thumbnail.url }}" class="card-img" alt="Disease Thumbnail">
+                    <!-- <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                    </div> -->
+                {% endif %}
+                <div class="position-absolute bottom-0 start-50 translate-middle-x mb-n5">
+                    <img class="border border-5 rounded-circle" src="{{ image_prediction.image.url }}" alt="" width="100%">
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center pb-4">
+            {% if infection_true %}
+                <div class="row mt-2">
+                    <h1 class="text-dark p-3 text-center fw-bolder" style="margin-top: 8rem;">More information about the Disease <span style="color: #DC143C;">{{ image_prediction.disease.name }}</span></h1>
+                    <div class="ck ck-content mt-5">
+                        <div class="row" >
+                            <h1 class="fw-bolder" style="color: #2c6455;"> <i class="fa-solid fa-circle"></i> Description</h1>
+                                <div class="text-dark p-4">
+                                    {{ image_prediction.disease.description|safe }}
+                                </div>
+                                <h1 class="fw-bolder" style="color: #2c6455;"> <i class="fa-solid fa-circle"></i> Solution</h1>
+                                <div class="text-dark p-4">
+                                    {{ image_prediction.disease.solution|safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}
