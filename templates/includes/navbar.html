@@ -11,15 +11,15 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto fs-5 fw-bold">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'home' %}">Home
+                    <a class="nav-link {% if request.path == '/' %}active {% endif %}" href="{% url 'home' %}">Home
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'post_list' %}">Blogs</a>
+                    <a class="nav-link {% if '/blogs/' in request.path %}active {% endif %}" href="{% url 'post_list' %}">Blogs</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link {% if request.path == 'about/' %} active {% endif %}" href="#">About</a>
                 </li>
 
                 <li class="nav-item dropdown">

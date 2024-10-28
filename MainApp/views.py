@@ -60,10 +60,12 @@ def upload_image(request):
             else:
                 cleaned_prediction = prediction.replace("___", " ")
                 image_prediction.prediction = "".join(cleaned_prediction)
+                prediction_family = image_prediction.prediction.split(" ")[0]
+                print(prediction_family)
                 prediction_disease = image_prediction.prediction.split(" ")[1]
                 prediction_disease = prediction_disease.replace("_", " ")
                 try:
-                    disease = DiseaseInfo.objects.filter(name__iexact=prediction_disease)
+                    disease = DiseaseInfo.objects.filter(category__iexact=prediction_family).filter(name__iexact=prediction_disease)
                     image_prediction.disease = disease[0]
                 except:
                     pass
@@ -78,6 +80,7 @@ def result(request, pk):
     image_prediction = ImagePrediction.objects.get(pk=pk)
     prediction_family = image_prediction.prediction.split(" ")[0]
     prediction_disease = image_prediction.prediction.split(" ")[1]
+    print(prediction_family)
     print(prediction_disease)
     if prediction_disease == "healthy":
         infection_false = "healthy"
